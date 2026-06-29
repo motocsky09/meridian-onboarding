@@ -1,0 +1,19 @@
+# .NET
+bin/
+obj/
+*.user
+.vs/
+
+# Angular / Node
+node_modules/
+dist/
+.angular/
+npm-debug.log*
+
+# Editor
+.vscode/
+.idea/
+
+# Env / secrets
+*.env
+appsettings.Development.json
