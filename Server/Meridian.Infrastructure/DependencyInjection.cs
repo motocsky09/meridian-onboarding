@@ -12,6 +12,7 @@ public static class DependencyInjection
 
         services.AddSingleton(mongoSettings);
         services.AddSingleton<MongoDbContext>();
+        services.AddScoped<Meridian.Application.Repositories.IEmployeeRepository, Repositories.EmployeeRepository>();
 
         return services;
     }
