@@ -8,10 +8,12 @@ namespace Meridian.Api.Controllers;
 public class EmployeesController : ControllerBase
 {
     private readonly EmployeeService _employeeService;
+    private readonly DashboardService _dashboardService;
 
-    public EmployeesController(EmployeeService employeeService)
+    public EmployeesController(EmployeeService employeeService, DashboardService dashboardService)
     {
         _employeeService = employeeService;
+        _dashboardService = dashboardService;
     }
 
     [HttpGet]
@@ -26,5 +28,12 @@ public class EmployeesController : ControllerBase
     {
         var employee = await _employeeService.GetByIdAsync(id);
         return employee is null ? NotFound() : Ok(employee);
+    }
+
+    [HttpGet("{id}/dashboard")]
+    public async Task<IActionResult> GetDashboard(string id)
+    {
+        var dashboard = await _dashboardService.GetDashboardAsync(id);
+        return dashboard is null ? NotFound() : Ok(dashboard);
     }
 }
