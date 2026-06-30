@@ -25,7 +25,11 @@
     <div class="checklist-stage" *ngFor="let stage of checklistStages">
       <h3>{{ stage }}</h3>
       <ul>
-        <li *ngFor="let item of dashboard.checklistByStage[stage]" [class.completed]="item.completed">
+        <li
+          *ngFor="let item of dashboard.checklistByStage[stage]"
+          [class.completed]="item.completed"
+          (click)="toggleItem(item)">
+          <span class="checkbox" [class.checked]="item.completed"></span>
           {{ item.title }}
         </li>
       </ul>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EmployeeService } from '../../core/services/employee.service';
-import { Dashboard } from '../../core/models/dashboard.model';
+import { Dashboard, ChecklistItem } from '../../core/models/dashboard.model';
 
 @Component({
   selector: 'app-onboarding-dashboard',
@@ -35,5 +35,16 @@ export class OnboardingDashboardComponent implements OnInit {
 
   get checklistStages(): string[] {
     return this.dashboard ? Object.keys(this.dashboard.checklistByStage) : [];
+  }
+
+  toggleItem(item: ChecklistItem): void {
+    const previousState = item.completed;
+    item.completed = !item.completed; // optimistic update
+
+    this.employeeService.toggleChecklistItem(item.id).subscribe({
+      error: () => {
+        item.completed = previousState; // revert on failure
+      }
+    });
   }
 }

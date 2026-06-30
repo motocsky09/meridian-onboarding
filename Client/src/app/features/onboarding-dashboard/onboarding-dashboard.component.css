@@ -96,3 +96,25 @@ section {
 .error {
   color: #c0392b;
 }
+
+.checklist-stage li {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  user-select: none;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #bbb;
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.checkbox.checked {
+  background-color: #2e7d32;
+  border-color: #2e7d32;
+}
