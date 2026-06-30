@@ -4,12 +4,24 @@ using Meridian.Infrastructure.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
+const string AngularClientPolicy = "AngularClient";
+
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(AngularClientPolicy, policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
@@ -29,6 +41,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(AngularClientPolicy);
 
 app.MapControllers();
 

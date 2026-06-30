@@ -1,0 +1,48 @@
+<div class="dashboard" *ngIf="dashboard && !loading">
+  <header class="header">
+    <h1>Welcome, {{ dashboard.employee.firstName }}!</h1>
+    <p>{{ dashboard.employee.role }} · {{ dashboard.employee.department }}</p>
+  </header>
+
+  <section class="people-card" *ngIf="dashboard.manager || dashboard.buddy">
+    <h2>Your people</h2>
+    <div class="people-grid">
+      <div class="person" *ngIf="dashboard.manager">
+        <span class="person-label">Manager</span>
+        <span class="person-name">{{ dashboard.manager.fullName }}</span>
+        <span class="person-role">{{ dashboard.manager.role }}</span>
+      </div>
+      <div class="person" *ngIf="dashboard.buddy">
+        <span class="person-label">Buddy</span>
+        <span class="person-name">{{ dashboard.buddy.fullName }}</span>
+        <span class="person-role">{{ dashboard.buddy.role }}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="checklist-card">
+    <h2>Onboarding checklist</h2>
+    <div class="checklist-stage" *ngFor="let stage of checklistStages">
+      <h3>{{ stage }}</h3>
+      <ul>
+        <li *ngFor="let item of dashboard.checklistByStage[stage]" [class.completed]="item.completed">
+          {{ item.title }}
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="schedule-card">
+    <h2>Your first week</h2>
+    <ul class="schedule-list">
+      <li *ngFor="let event of dashboard.schedule">
+        <span class="schedule-date">{{ event.date | date: 'EEE, MMM d' }}</span>
+        <span class="schedule-title">{{ event.title }}</span>
+        <span class="schedule-with" *ngIf="event.withPersonName">with {{ event.withPersonName }}</span>
+      </li>
+    </ul>
+  </section>
+</div>
+
+<div class="loading" *ngIf="loading">Loading your onboarding dashboard...</div>
+<div class="error" *ngIf="error">Could not load dashboard. Is the backend running?</div>
