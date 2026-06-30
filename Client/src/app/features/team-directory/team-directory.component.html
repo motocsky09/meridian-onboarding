@@ -1,0 +1,20 @@
+<div class="directory" *ngIf="!loading && !error">
+  <header class="header">
+    <a routerLink="/" class="back-link">← Back to dashboard</a>
+    <h1>Meet the team</h1>
+    <p>{{ employees.length }} people across {{ departments.length }} departments</p>
+  </header>
+
+  <section class="department-group" *ngFor="let department of departments">
+    <h2>{{ department }}</h2>
+    <div class="people-grid">
+      <div class="person-card" *ngFor="let employee of employeesInDepartment(department)">
+        <span class="person-name">{{ employee.firstName }} {{ employee.lastName }}</span>
+        <span class="person-role">{{ employee.role }}</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="loading" *ngIf="loading">Loading team directory...</div>
+<div class="error" *ngIf="error">Could not load team directory. Is the backend running?</div>

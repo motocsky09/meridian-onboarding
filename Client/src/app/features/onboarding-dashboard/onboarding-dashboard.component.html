@@ -2,6 +2,7 @@
   <header class="header">
     <h1>Welcome, {{ dashboard.employee.firstName }}!</h1>
     <p>{{ dashboard.employee.role }} · {{ dashboard.employee.department }}</p>
+    <a routerLink="/team" class="team-link">View team directory →</a>
   </header>
 
   <section class="people-card" *ngIf="dashboard.manager || dashboard.buddy">

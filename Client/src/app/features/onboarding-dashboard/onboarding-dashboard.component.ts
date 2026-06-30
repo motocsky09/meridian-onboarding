@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { EmployeeService } from '../../core/services/employee.service';
 import { Dashboard, ChecklistItem } from '../../core/models/dashboard.model';
 
 @Component({
   selector: 'app-onboarding-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './onboarding-dashboard.component.html',
   styleUrls: ['./onboarding-dashboard.component.css']
 })
